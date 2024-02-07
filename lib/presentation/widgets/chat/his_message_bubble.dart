@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 
 class HisMessageBubble extends StatelessWidget {
-  const HisMessageBubble({super.key});
-
+  const HisMessageBubble({super.key, required this.message});
+  final Message message;
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -13,17 +14,17 @@ class HisMessageBubble extends StatelessWidget {
             decoration: BoxDecoration(
                 color: colors.secondary,
                 borderRadius: BorderRadius.circular(20)),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text(
-                "Hahaha pretty boy baby",
-                style: TextStyle(color: Colors.white),
+                message.text,
+                style: const TextStyle(color: Colors.white),
               ),
             )),
         const SizedBox(
           height: 5,
         ),
-        _ImageBubble(),
+        _ImageBubble(message.imageUrl!),
         const SizedBox(
           height: 10,
         ),
@@ -33,9 +34,8 @@ class HisMessageBubble extends StatelessWidget {
 }
 
 class _ImageBubble extends StatelessWidget {
-  static const imageUrl =
-      "http://www.holaeslola.com/wp-content/uploads/2019/09/giphy-2.gif";
-
+  const _ImageBubble(this.imageUrl);
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -52,7 +52,7 @@ class _ImageBubble extends StatelessWidget {
             width: size.width * 0.7,
             height: 150,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: const Text("Maluma esta escribiendo"),
+            child: const Text("Juan is typing"),
           );
         },
       ),
